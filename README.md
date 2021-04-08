@@ -1,31 +1,33 @@
-# fukedao-backend
+# hackernews-async-ts
 
-A backend service build with egg.js for ZJU 2021 course Fukedao.
+[Hacker News](https://news.ycombinator.com/) showcase using typescript && egg
 
 ## QuickStart
-
-see [egg docs][egg] for more detail.
 
 ### Development
 
 ```bash
-$ yarn 
-$ yarn run dev
+$ npm i
+$ npm run dev
 $ open http://localhost:7001/
 ```
+
+Don't tsc compile at development mode, if you had run `tsc` then you need to `npm run clean` before `npm run dev`.
 
 ### Deploy
 
 ```bash
-$ yarn start
-$ yarn stop
+$ npm run tsc
+$ npm start
 ```
 
-### npm scripts
+### Npm Scripts
 
-- Use `yarn run lint` to check code style.
-- Use `yarn test` to run unit test.
-- Use `yarn run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
+- Use `npm run lint` to check code style
+- Use `npm test` to run unit test
+- se `npm run clean` to clean compiled js at development mode once
 
+### Requirement
 
-[egg]: https://eggjs.org
+- Node.js 8.x
+- Typescript 2.8+
