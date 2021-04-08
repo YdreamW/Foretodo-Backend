@@ -1,14 +1,14 @@
-# hackernews-async-ts
+# Fukedao-Backend
 
-[Hacker News](https://news.ycombinator.com/) showcase using typescript && egg
+ZJU 2021 春学期《服务科学导论》专题作业微信小程序后端服务。
 
 ## QuickStart
 
 ### Development
 
 ```bash
-$ npm i
-$ npm run dev
+$ yarn
+$ yarn run dev
 $ open http://localhost:7001/
 ```
 
@@ -17,15 +17,15 @@ Don't tsc compile at development mode, if you had run `tsc` then you need to `np
 ### Deploy
 
 ```bash
-$ npm run tsc
-$ npm start
+$ yarn run tsc
+$ yarn start
 ```
 
 ### Npm Scripts
 
-- Use `npm run lint` to check code style
-- Use `npm test` to run unit test
-- se `npm run clean` to clean compiled js at development mode once
+- Use `yarn run lint` to check code style
+- Use `yarn test` to run unit test
+- se `yarn run clean` to clean compiled js at development mode once
 
 ### Requirement
 
