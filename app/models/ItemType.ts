@@ -1,7 +1,6 @@
-import { Application } from 'egg';
+import * as mongoose from 'mongoose';
 
-export default (app: Application) => {
-  const { mongoose } = app;
+export default () => {
   const { Schema, model } = mongoose;
 
   const ItemTypeSchema = new Schema(

@@ -6,8 +6,9 @@ export default class UserController extends Controller {
    */
   public async WechatLogin(ctx: Context) {
     const { code } = ctx.request.body;
-    // @ts-ignore
     // 与微信服务器交互
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const user = await ctx.app.weappOauth.getUser(code);
     const { openid } = user;
     // 账户逻辑体系判断
@@ -16,10 +17,8 @@ export default class UserController extends Controller {
     // 第一次登录时
     if (!account) {
       // 账户入库
-      const anonymousAvatar = await ctx.service.user.generateAvatar(openid);
       account = await ctx.service.user.create({
         openid,
-        anonymousAvatar,
         source: 'wechat',
       });
     } else {

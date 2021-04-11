@@ -1,15 +1,9 @@
 import { Service } from 'egg';
-import jdenticon from 'jdenticon';
-import crypto from 'crypto';
 
 /**
  * Users Service
  */
 export default class Users extends Service {
-  constructor(ctx) {
-    super(ctx);
-    // 生成微信客户对象
-  }
 
   async findAll() {
     return await this.ctx.model.User.find();
@@ -33,13 +27,6 @@ export default class Users extends Service {
 
   async delete(_id) {
     return await this.ctx.model.User.findByIdAndRemove(_id);
-  }
-
-  async generateAvatar(id = Math.random().toString(), size = 32) {
-    const md5 = crypto.createHash('md5').update(id);
-    const avatar = jdenticon.toPng(md5.digest('hex'), size);
-    // 将匿名头像传到 OSS
-    return await this.ctx.service.oss.upload(avatar);
   }
 
   /**
