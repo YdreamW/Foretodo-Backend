@@ -6,17 +6,17 @@ import { Context } from 'egg';
  */
 export default (Model: string) => async (ctx: Context, next) => {
   const { model, throw: throwErr } = ctx;
-  const { id } = ctx.params;
+  const { _id } = ctx.params;
   // 查询 id 是否存在
   let data;
   try {
-    data = await model[Model].findById(id);
+    data = await model[Model].findById(_id);
   } catch (e) {
     const { value } = e;
     throwErr(422, { value, message: 'id 格式出错' });
   }
   if (!data) {
-    throwErr(404, `id不存在,请检查输入`);
+    throwErr(404, 'id不存在,请检查输入');
   }
   await next();
 };

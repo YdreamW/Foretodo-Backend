@@ -19,15 +19,7 @@ export default (app: Application) => {
     '/user/:id',
     checkItemExist('User'),
     jwtAuth(),
-    controller.user.getUserInfoById,
-  );
-
-  // 微信用户注册资料
-  router.post(
-    '/user/:id/info/register',
-    checkItemExist('User'),
-    jwtAuth(),
-    controller.user.updateRegisterUserInfo,
+    controller.user.getUserInfo,
   );
 
   // 更新用户资料
