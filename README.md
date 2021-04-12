@@ -21,7 +21,7 @@ $ yarn run tsc
 $ yarn start
 ```
 
-### Npm Scripts
+### Scripts
 
 - Use `yarn run lint` to check code style
 - Use `yarn test` to run unit test
@@ -31,3 +31,12 @@ $ yarn start
 
 - Node.js 8.x
 - Typescript 2.8+
+
+### Environment Variables
+
+```dotenv
+JWT_SECRET=
+MONGO_URL=
+WECHAT_APP_ID=
+WECHAT_APP_SECRET=
+```

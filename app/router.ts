@@ -1,6 +1,7 @@
 import { Application } from 'egg';
 
 export default (app: Application) => {
+
   const { controller, router } = app;
 
   // HeathCheck 用于自动化监控服务状态，应总是回传 200 OK
