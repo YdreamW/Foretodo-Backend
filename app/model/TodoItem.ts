@@ -15,5 +15,5 @@ module.exports = app => {
     { timestamps: true },
   );
 
-  return model('TodoItem', TodoItemSchema);
+  return model('TodoItem', TodoItemSchema, 'todoItem');
 };
