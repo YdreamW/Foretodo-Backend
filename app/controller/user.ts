@@ -2,6 +2,12 @@ import { Context, Controller } from 'egg';
 
 export default class UserController extends Controller {
 
+  /**
+   * ## Wechat Login 微信授权登入接口
+   *
+   * - Request Body : 用户数据 (nickname, avatar, gender, age ...) + code (登入验证码)
+   * - Response Body : user (用户数据) + token
+   * */
   public async WechatLogin(ctx: Context) {
     const { code } = ctx.request.body;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -11,7 +17,7 @@ export default class UserController extends Controller {
 
     // 新用户首次登入，进行数据入库
     if (user === undefined) {
-      user = await ctx.service.user.create({ openid: wechatUser.openid, unionid: wechatUser.unionid });
+      user = await ctx.service.user.create(ctx.request.body);
     }
 
     const token = this.ctx.service.auth.createToken(user._id);
