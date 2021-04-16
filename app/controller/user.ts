@@ -6,7 +6,14 @@ export default class UserController extends Controller {
     const { code } = ctx.request.body;
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    const user = await ctx.app.weappOauth.getUser(code);
+    const wechatUser = await ctx.app.weappOauth.getUser(code);
+    let user = await ctx.service.user.findByOpenId(wechatUser.openid);
+
+    // 新用户首次登入，进行数据入库
+    if (user === undefined) {
+      user = await ctx.service.user.create({ openid: wechatUser.openid, unionid: wechatUser.unionid });
+    }
+
     const token = this.ctx.service.auth.createToken(user._id);
     ctx.body = { user, token };
   }
