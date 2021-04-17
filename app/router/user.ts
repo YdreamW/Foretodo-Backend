@@ -19,7 +19,14 @@ export default (app: Application) => {
     '/user/:id',
     checkItemExist('User'),
     jwtAuth(),
-    controller.user.getUserInfo,
+    controller.user.getUserInfo
+  );
+
+  router.post(
+    '/user/:id/info/register',
+    checkItemExist('User'),
+    jwtAuth(),
+    controller.user.updateRegisterUserInfo
   );
 
   // 更新用户资料
@@ -27,6 +34,6 @@ export default (app: Application) => {
     '/user/:id/info',
     checkItemExist('User'),
     jwtAuth(),
-    controller.user.updateUserInfo,
+    controller.user.updateUserInfo
   );
 };

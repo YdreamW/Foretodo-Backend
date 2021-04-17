@@ -10,7 +10,7 @@ export default class ItemTypeGroupController extends Controller {
   }
 
   public async GetManyItemTypeGroup(ctx: Context) {
-    ctx.body = await ctx.model.TodoItem.find().populate('itemTypes');
+    ctx.body = await ctx.model.ItemTypeGroup.find().populate('itemTypes');
   }
 
   public async InsertItemTypeGroup(ctx: Context) {

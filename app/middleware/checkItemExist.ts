@@ -6,11 +6,11 @@ import { Context } from 'egg';
  */
 export default (Model: string) => async (ctx: Context, next) => {
   const { model, throw: throwErr } = ctx;
-  const { _id } = ctx.params;
+  const { id } = ctx.params;
   // 查询 id 是否存在
   let data;
   try {
-    data = await model[Model].findById(_id);
+    data = await model[Model].findById(id);
   } catch (e) {
     const { value } = e;
     throwErr(422, { value, message: 'id 格式出错' });

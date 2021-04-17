@@ -1,7 +1,6 @@
 import { Context, Controller } from 'egg';
 
 export default class UserController extends Controller {
-
   /**
    * ## Wechat Login 微信授权登入接口
    *
@@ -13,29 +12,68 @@ export default class UserController extends Controller {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     const wechatUser = await ctx.app.weappOauth.getUser(code);
-    let user = await ctx.service.user.findByOpenId(wechatUser.openid);
 
+    console.log(wechatUser);
+    const { openid } = wechatUser;
+    let user = await ctx.service.user.findByOpenId(openid);
+
+    const isNew = !(user && user.nickName);
     // 新用户首次登入，进行数据入库
-    if (user === undefined) {
-      user = await ctx.service.user.create(ctx.request.body);
+    if (!user) {
+      // user = await new this.ctx.model.User({
+      //   openid,
+      // }).save();
+      user = await ctx.service.user.create({
+        openid,
+      });
     }
 
-    const token = this.ctx.service.auth.createToken(user._id);
-    ctx.body = { user, token };
+    const { _id } = user;
+    const token = this.ctx.service.auth.createToken({ _id });
+    ctx.body = { code: 0, msg: 'success', data: { _id, openid, isNew, token } };
   }
 
   public async getUserInfo(ctx: Context) {
-    const { user: { _id } } = ctx.state;
+    const {
+      user: { _id },
+    } = ctx.state;
     const { fields } = ctx.query;
     const selectFields =
       fields &&
       fields
         .split(';')
-        .map(f => ' +' + f)
-        .filter(f => f)
+        .map((f) => ' +' + f)
+        .filter((f) => f)
         .join('');
 
-    ctx.body = await ctx.model.User.findById(_id).select(selectFields);
+    const user = await ctx.model.User.findById(_id).select(selectFields);
+    ctx.body = {
+      code: 0,
+      msg: 'success',
+      data: user,
+    };
+  }
+
+  /**
+   * 注册基础信息
+   */
+  public async updateRegisterUserInfo(ctx: Context) {
+    const { id } = ctx.params;
+
+    const { avatarUrl: avatar, ...info } = ctx.request.body;
+
+    console.log(ctx.request.body);
+    // 更新用户数据
+    const user = await ctx.model.User.findByIdAndUpdate(id, {
+      avatar,
+      ...info,
+    });
+
+    ctx.body = {
+      code: 0,
+      msg: 'success',
+      data: user,
+    };
   }
 
   public async updateUserInfo(ctx: Context) {

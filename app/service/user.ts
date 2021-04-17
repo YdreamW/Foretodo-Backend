@@ -4,7 +4,6 @@ import { Service } from 'egg';
  * Users Service
  */
 export default class Users extends Service {
-
   async findAll() {
     return await this.ctx.model.User.find();
   }

@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",
-    "@types/node": "^7.0.12",
+    "@types/node": "^13.1.5",
     "@types/supertest": "^2.0.0",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
@@ -46,7 +46,8 @@
     "eslint": "^6.7.2",
     "eslint-config-egg": "^8.0.0",
     "tslib": "^1.9.0",
-    "typescript": "^3.0.0"
+    "typescript": "^3.0.0",
+    "moment": "^2.24.0"
   },
   "engines": {
     "node": ">=8.9.0"

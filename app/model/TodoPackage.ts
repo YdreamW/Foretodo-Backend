@@ -8,6 +8,7 @@ export default () => {
       __v: { type: Number, select: false },
       user: { type: Schema.Types.ObjectId, select: false, ref: 'User' },
       items: [{ type: Schema.Types.ObjectId, select: false, ref: 'TodoItem' }],
+      title: { type: String, select: false },
       beginTime: { type: Date, select: false },
       endTime: { type: Date, select: false },
     },
