@@ -12,6 +12,7 @@ export default (app: Application) => {
 
   router.get(
     '/item-type-group',
+    jwtAuth(),
     controller.itemTypeGroup.GetManyItemTypeGroup,
   );
 
