@@ -5,7 +5,7 @@ export default (app: Application) => {
   const { checkItemExist, jwtAuth } = app.middleware;
 
   router.get(
-    '/todo-package/:_id',
+    '/todo-package/:id',
     checkItemExist('TodoPackage'),
     jwtAuth(),
     controller.todoPackage.GetOneTodoPackage,

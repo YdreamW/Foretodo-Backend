@@ -2,10 +2,18 @@ import { Context, Controller } from 'egg';
 
 export default class TodoPackageController extends Controller {
   public async GetOneTodoPackage(ctx: Context) {
-    const todoPackageId = ctx.params._id;
-    ctx.body = await ctx.model.TodoPackage.findById(todoPackageId).populate(
-      'user'
-    );
+    const todoPackageId = ctx.params.id;
+    const todoPackage = await ctx.model.TodoPackage.findById(
+      todoPackageId
+    ).populate({
+      path: 'items',
+      populate: { path: 'type', populate: { path: 'group' } },
+    });
+    ctx.body = {
+      code: 0,
+      msg: 'success',
+      data: { todoPackage },
+    };
   }
 
   public async GetManyTodoPackage(ctx: Context) {
@@ -16,7 +24,7 @@ export default class TodoPackageController extends Controller {
       user: _id,
     }).populate({
       path: 'items',
-      populate: { path: 'type', populate: { path: 'group' } },
+      select: 'done',
     });
     ctx.body = {
       code: 0,
