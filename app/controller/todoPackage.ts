@@ -18,7 +18,6 @@ export default class TodoPackageController extends Controller {
       path: 'items',
       populate: { path: 'type', populate: { path: 'group' } },
     });
-    console.log(todoPackages);
     ctx.body = {
       code: 0,
       msg: 'success',
@@ -38,6 +37,7 @@ export default class TodoPackageController extends Controller {
         user: _id,
         type,
         duration,
+        done: false,
       });
       items.push(item._id);
     }
