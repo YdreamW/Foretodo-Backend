@@ -21,7 +21,23 @@ export default class TodoPackageController extends Controller {
   }
 
   public async InsertTodoPackage(ctx: Context) {
-    ctx.body = 'API not available.';
+    const {
+      user: { _id },
+    } = ctx.state;
+    const { items, beginTime, endTime, title } = ctx.request.body;
+    await ctx.model.TodoPackage.create({
+      user: _id,
+      items,
+      beginTime,
+      endTime,
+      title,
+    });
+
+    // await ctx.model.User.update({_id},{})
+    ctx.body = {
+      code: 0,
+      msg: 'success',
+    };
   }
 
   public async UpdateTodoPackage(ctx: Context) {

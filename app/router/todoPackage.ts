@@ -25,7 +25,7 @@ export default (app: Application) => {
   );
 
   router.post(
-    '/todo-package',
+    '/add/todo-package',
     jwtAuth(),
     controller.todoPackage.InsertTodoPackage,
   );
