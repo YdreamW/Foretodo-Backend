@@ -9,7 +9,6 @@ module.exports = app => {
       duration: { type: Number },
       user: { type: Schema.Types.ObjectId, ref: 'User' },
       done: { type: Boolean },
-      package: { type: Schema.Types.ObjectId, ref: 'TodoPackage' },
       type: { type: Schema.Types.ObjectId, ref: 'ItemType' },
     },
     { timestamps: true },

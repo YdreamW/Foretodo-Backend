@@ -12,7 +12,13 @@ export default class TodoPackageController extends Controller {
     const {
       user: { _id },
     } = ctx.state;
-    const todoPackages = await ctx.model.TodoPackage.find({ user: _id });
+    const todoPackages = await ctx.model.TodoPackage.find({
+      user: _id,
+    }).populate({
+      path: 'items',
+      populate: { path: 'type', populate: { path: 'group' } },
+    });
+    console.log(todoPackages);
     ctx.body = {
       code: 0,
       msg: 'success',
@@ -24,7 +30,17 @@ export default class TodoPackageController extends Controller {
     const {
       user: { _id },
     } = ctx.state;
-    const { items, beginTime, endTime, title } = ctx.request.body;
+    const { items: tmpItems, beginTime, endTime, title } = ctx.request.body;
+    const items: string[] = [];
+    for (let i = 0; i < tmpItems.length; i++) {
+      const { type, duration } = tmpItems[i];
+      const item = await ctx.model.TodoItem.create({
+        user: _id,
+        type,
+        duration,
+      });
+      items.push(item._id);
+    }
     await ctx.model.TodoPackage.create({
       user: _id,
       items,
@@ -32,8 +48,6 @@ export default class TodoPackageController extends Controller {
       endTime,
       title,
     });
-
-    // await ctx.model.User.update({_id},{})
     ctx.body = {
       code: 0,
       msg: 'success',

@@ -5,14 +5,14 @@ export default () => {
 
   const TodoPackageSchema = new Schema(
     {
-      __v: { type: Number, select: false },
-      user: { type: Schema.Types.ObjectId, select: false, ref: 'User' },
-      items: [{ type: Schema.Types.ObjectId, select: false, ref: 'TodoItem' }],
-      title: { type: String, select: false },
-      beginTime: { type: Date, select: false },
-      endTime: { type: Date, select: false },
+      __v: { type: Number, select: true },
+      user: { type: Schema.Types.ObjectId, select: true, ref: 'User' },
+      items: [{ type: Schema.Types.ObjectId, select: true, ref: 'TodoItem' }],
+      title: { type: String, select: true },
+      beginTime: { type: Date, select: true },
+      endTime: { type: Date, select: true },
     },
-    { timestamps: true },
+    { timestamps: true }
   );
 
   return model('TodoPackage', TodoPackageSchema, 'todoPackage');
