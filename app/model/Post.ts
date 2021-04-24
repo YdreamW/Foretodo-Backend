@@ -9,7 +9,7 @@ export default () => {
       title: { type: String },
       content: { type: String },
       user: { type: Schema.Types.ObjectId, ref: 'User' },
-      item: { type: Schema.Types.ObjectId, ref: 'TodoItem' },
+      package: { type: Schema.Types.ObjectId, ref: 'TodoPackage' },
       createAt: { type: Date },
     },
     { timestamps: true },
